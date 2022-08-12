@@ -6,9 +6,11 @@ const app = express();
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-    res.send('teste');
-});
+const UserController = require('./controllers/UserController.js');
+app.use('/users',(UserController));
+
+const ProjectController = require('./controllers/ProjectCrontoller.js');
+app.use('/projects',(ProjectController));
 
 mongoose.connect(process.env.MONGO_URL).then(()=>{
     app.listen(process.env.PORT || 8080,(err)=>{
